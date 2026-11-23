@@ -1,0 +1,194 @@
+# =====================================================================
+# treeish .gitignore
+# 원칙: 빌드 산출물, 개인 환경 설정, 비밀 정보, 런타임 데이터는 올리지 않는다.
+# 주의: "build/", "data/" 같은 이름은 Java 패키지 이름과 겹칠 수 있어서
+#       소스 디렉터리 안은 예외로 되돌리거나 루트 기준(/)으로만 막는다.
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# Gradle
+# ---------------------------------------------------------------------
+.gradle/
+build/
+!**/src/**/build/
+.kotlin/
+local.properties
+gradle-app.setting
+.gradletasknamecache
+# 래퍼 jar는 반드시 커밋한다 (./gradlew 실행에 필요)
+!gradle/wrapper/gradle-wrapper.jar
+
+# ---------------------------------------------------------------------
+# Java / JVM
+# ---------------------------------------------------------------------
+*.class
+*.ctxt
+.mtj.tmp/
+# 빌드 결과물 jar/war (래퍼 jar는 위에서 예외 처리)
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.nar
+*.ear
+# 배포용 압축 산출물
+*.zip
+*.tar.gz
+*.rar
+# JVM 크래시 로그, 힙 덤프
+hs_err_pid*
+replay_pid*
+*.hprof
+*.jfr
+
+# ---------------------------------------------------------------------
+# IntelliJ IDEA
+# ---------------------------------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+!**/src/**/out/
+.idea_modules/
+# IntelliJ HTTP Client의 개인 환경 파일 (토큰이 들어감, .idea 밖에도 생김)
+http-client.private.env.json
+
+# ---------------------------------------------------------------------
+# VS Code
+# ---------------------------------------------------------------------
+.vscode/
+*.code-workspace
+.history/
+*.vsix
+
+# ---------------------------------------------------------------------
+# Eclipse / NetBeans
+# ---------------------------------------------------------------------
+.classpath
+.project
+.settings/
+.factorypath
+bin/
+!**/src/**/bin/
+.apt_generated/
+.apt_generated_tests/
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# ---------------------------------------------------------------------
+# OS
+# ---------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+.apdisk
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.stackdump
+*.lnk
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ---------------------------------------------------------------------
+# 에디터 임시 파일
+# ---------------------------------------------------------------------
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# ---------------------------------------------------------------------
+# 비밀 정보 (키, 인증서, 토큰, 환경변수)
+# 실수로 올라가면 git 히스토리에 영구히 남는다. 커밋 전 gitleaks 훅이 2차로 막는다.
+# ---------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.truststore
+id_rsa*
+id_ed25519*
+id_ecdsa*
+*.ppk
+*.gpg
+.netrc
+# Kubernetes 접속 정보 (9단계 홈 클러스터 배포 대비)
+kubeconfig*
+*.kubeconfig
+credentials*.json
+secrets*.yml
+secrets*.yaml
+# Spring 로컬·비밀 프로파일 (공통 설정만 application.yml에 커밋)
+application-local.*
+application-secret.*
+application-prod.*
+
+# ---------------------------------------------------------------------
+# 런타임 데이터, 로그
+# ---------------------------------------------------------------------
+# bootRun 시 생성되는 베어 저장소들 (루트 또는 모듈 작업 디렉터리 기준)
+/data/
+/treeish-*/data/
+*.log
+*.pid
+logs/
+!**/src/**/logs/
+
+# ---------------------------------------------------------------------
+# 테스트, 커버리지, 리포트
+# ---------------------------------------------------------------------
+jacoco.exec
+*.exec
+.jqwik-database
+gitleaks-report.*
+
+# ---------------------------------------------------------------------
+# 프론트엔드 (이후 React 추가 대비)
+# ---------------------------------------------------------------------
+node_modules/
+dist/
+!**/src/**/dist/
+.vite/
+coverage/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# ---------------------------------------------------------------------
+# 개인 AI 도구 로컬 설정 (공유용 설정 파일은 커밋 가능)
+# ---------------------------------------------------------------------
+.claude/settings.local.json
+.claude/*.local.*
+.aider*

@@ -1,0 +1,10 @@
+* text=auto eol=lf
+
+*.bat text eol=crlf
+gradlew text eol=lf
+
+*.jar binary
+# 테스트용 git 저장소 픽스처 (팩파일, 인덱스, zlib 객체)
+*.pack binary
+*.idx binary
+*.rev binary

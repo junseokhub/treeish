@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# 커밋 전에 비밀 정보(키, 토큰)가 섞였는지 검사한다.
+# 활성화: git config core.hooksPath .githooks
+set -euo pipefail
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "gitleaks가 없어서 비밀 정보 검사를 건너뜁니다. (brew install gitleaks)" >&2
+  exit 0
+fi
+
+gitleaks git --pre-commit --staged --redact --verbose

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: treeish-server
+  threads:
+    virtual:
+      # clone/push는 오래 걸리는 블로킹 스트리밍이라 요청마다 virtual thread를 쓴다.
+      enabled: true
+
+server:
+  port: 8080
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
