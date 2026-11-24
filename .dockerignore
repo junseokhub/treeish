@@ -1,0 +1,66 @@
+# 모든 이미지 빌드에 적용된다. 서버는 다른 모듈도 함께 빌드하므로 컨텍스트가 저장소 루트이고,
+# Docker는 컨텍스트 루트의 .dockerignore만 읽는다. 패턴은 루트 기준이라 하위 모듈까지 막으려면 **/ 를 붙인다.
+
+
+.git
+.githooks
+.idea
+.vscode
+**/*.iml
+docs
+*.md
+
+# Gradle, 빌드 산출물 (이미지 안에서 새로 빌드한다)
+**/.gradle
+**/.kotlin
+**/build
+**/out
+!**/src/**/build
+!**/src/**/out
+**/*.class
+**/*.jar
+!gradle/wrapper/gradle-wrapper.jar
+local.properties
+
+# 비밀 정보, 로컬 프로파일 (이미지 레이어에 남으면 지울 수 없다)
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*.crt
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+**/*.truststore
+**/application-local.*
+**/application-secret.*
+**/application-prod.*
+**/credentials*.json
+**/secrets*.y*ml
+**/*kubeconfig*
+
+# 런타임 데이터, 로그, 덤프
+data
+treeish-*/data
+**/*.log
+**/logs
+!**/src/**/logs
+**/*.hprof
+**/hs_err_pid*
+
+# OS, 에디터 임시 파일
+**/.DS_Store
+**/*.swp
+**/*~
+
+# 프론트엔드 (이후 React 모듈 추가 대비)
+**/node_modules
+**/dist
+!**/src/**/dist
+
+# Docker 설정 자체
+**/Dockerfile*
+**/.dockerignore
+**/compose*.y*ml
+**/docker-compose*.y*ml
